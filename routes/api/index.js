@@ -5,7 +5,7 @@ const friendsRoute = require('./friends')
 
 router.use('/users', usersRoute)
 router.use('/thoughts', thoughtsRoute)
-routner.use('/friends', friendsRoute)
+router.use('/friends', friendsRoute)
 
 module.exports = router;
 
