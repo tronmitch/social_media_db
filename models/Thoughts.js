@@ -13,11 +13,11 @@ const thoughtsSchema = new Schema(
         type: String,
         required: true,
      },
-    //  "create_date": {
-    //     type: Date,
-    //     required: false,
-    //     max_length: 50
-    //  },
+     "createAt": {
+        type: Date,
+        required: false,
+        max_length: 50
+     },
     //  "reactions": reactionsSchema
     },
     {
@@ -26,6 +26,12 @@ const thoughtsSchema = new Schema(
         }
     }
 )
+
+thoughtsSchema.set('toJSON', {
+    virtuals: true,
+    versionKey: false, // Exclude __v in output
+    transform: function (doc, ret) { delete ret._id; } // Exclude _id from output
+  });
 
 // Virtual to get reaction count
 // thoughtsSchema.virtual('reactions_count').get(function(){
@@ -44,16 +50,28 @@ const Thought =  model('thought', thoughtsSchema)
 // Thought.deleteMany({}).then(resul=> console.log ('Deleted Thought table'))
 
 // Thought.create(
-//     {
-//         thought_text: "Congrats on the new snowmobile",
-//         user_name: "Stockton",
-//         create_date: "March 10th, 2024"
-//       },
-//       {
-//         thought_text: "Can you kick it",
-//         user_name: "Stockton",
-//         create_date: "March 10th, 2024"  
-//       }
+//     [
+//         {
+//             "thought_text": "Congrats on the new snowmobile",
+//             "user_name": "Stockton",
+//             "id": "6600ef0a20409424c0cb4f57"
+//         },
+//         {
+//             "thought_text": "I thought you meant of the things we eat",
+//             "user_name": "Bo",
+//             "id": "660101ae28aef25080ea6236"
+//         },
+//         {
+//             "thought_text": "taasdf",
+//             "user_name": "Bo",
+//             "id": "66010351135ba2267ffe1999"
+//         },
+//         {
+//             "thought_text": "taasdf",
+//             "user_name": "Bo",
+//             "id": "660103a478f0b76ff76b2a6e"
+//         }
+//     ]
 //   ).then(result => console.log('Created new document', result))
 //   .catch(err => console.error(err))
 

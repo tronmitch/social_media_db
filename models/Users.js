@@ -11,12 +11,13 @@ const userSchema = new Schema(
         },
         "thoughts": [{type: Schema.Types.ObjectId, ref: 'Thought'}],
         "friends": [{type: Schema.Types.ObjectId, ref: 'User'}],
-        "email":{
+        "email": {
             type: String,
             required: true,
             unique: true,
-            match: '/^S+@\S+\.\S+$/',
+            match: [/^\S+@\S+\.\S+$/, 'Please fill a valid email address'],
         }
+        
 
     },
     {
